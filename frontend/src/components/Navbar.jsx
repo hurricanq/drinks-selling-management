@@ -20,7 +20,6 @@ const Navbar = (props) => {
     const [totalQuantity, setTotalQuantity] = useState(0)
 
     const carts = useSelector(store => store.cart.items)
-    console.log(carts)
 
     useEffect(() => {
         let total = 0

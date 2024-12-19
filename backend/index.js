@@ -272,9 +272,9 @@ app.delete("/review/:id", (req, res) => {
     });
 });
 
+// API for MOMO
 var accessKey = 'F8BBA842ECF85';
 var secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
-// MOMO payment link
 app.post("/payment", async (req, res) => {
     //https://developers.momo.vn/#/docs/en/aiov2/?id=payment-method
     //parameters
