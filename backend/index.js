@@ -51,6 +51,10 @@ const sendMail = async ({email, subject, html}) => {
     return result;
 }
 
+app.get("/", (req, res) => {
+    return res.json("Hello"); 
+})
+
 // CRUD Operations
 // POST (Create) A USER (Sign In)
 app.post("/register", (req, res) => {
