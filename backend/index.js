@@ -51,10 +51,6 @@ const sendMail = async ({email, subject, html}) => {
     return result;
 }
 
-app.get("/", (req, res) => {
-    return res.json("Hello"); 
-})
-
 // CRUD Operations
 // POST (Create) A USER (Sign In)
 app.post("/register", (req, res) => {
@@ -88,7 +84,7 @@ app.post("/login", (req, res) => {
             bcrypt.compare(req.body.password.toString(), data[0].password, (err, response) => {
                 if (err) return res.send(`Error Message: ${err}`);
                 if (response) {
-                    const {id, username, email, phoneNumber} = data[0];
+                    const {id, username, email, phoneNumber} = data[0]
                     const token = jwt.sign({id, username, email, phoneNumber}, "jwt-secret-key", {expiresIn: '1d'});
                     res.cookie('token', token);
                     return res.json({status: "Successful"});
@@ -237,7 +233,6 @@ app.delete("/product/:id", (req, res) => {
     });
 });
 
-//
 // POST (Create) A REVIEW
 app.post("/review", (req, res) => {
     const q = "INSERT INTO review (`userId`, `productId`, `reviewContent`, `reviewDate`) VALUES (?)";
@@ -276,9 +271,9 @@ app.delete("/review/:id", (req, res) => {
     });
 });
 
-// API for MOMO
 var accessKey = 'F8BBA842ECF85';
 var secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
+// MOMO payment link
 app.post("/payment", async (req, res) => {
     //https://developers.momo.vn/#/docs/en/aiov2/?id=payment-method
     //parameters

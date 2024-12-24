@@ -9,7 +9,8 @@ import axios from "axios";
 const Products = () => {
   const styles = {
     activeTab: {
-      background: "#6b21a8"
+      background: "#696969",
+      color: "white"
     }
   };
 
@@ -71,15 +72,15 @@ const Products = () => {
   {/* Render all category tabs */}
   const categoryNav = categories.map(category => {
     return (
-      <div
+      <button
         key={category.id}
-        className="flex items-center gap-x-3 bg-primary-bg w-40 p-3 text-white text-xl font-semibold text-center rounded-xl cursor-pointer"
+        className="flex items-center gap-x-3 border-solid border-2 min-w-40 p-3 text-xl font-semibold text-center rounded-xl transition-opacity"
         style={{...(activeTab === category.categoryName ? styles.activeTab : {})}}
         onClick={() => setActiveTab(category.categoryName)}
       >
         <img src="./assets/drink.svg" alt="Category" className="w-10" />
         {category.categoryName}
-      </div>
+      </button>
     )
   })
 
@@ -89,8 +90,8 @@ const Products = () => {
       <div key={category.id} id={category.categoryName} className="mb-5">
         {activeTab === category.categoryName && (
         <div>
-            <h2 className="mb-5 text-2xl font-bold tracking-tight text-primary-text border-b border-gray-300 pb-2">Menu</h2>
-            <div className="flex justify-between items-center">
+            <h2 className="mb-5 text-2xl font-bold tracking-tight border-b border-gray-300 pb-2">Menu</h2>
+            <div className="lg:flex justify-between items-center">
               {/* Search Products */}
               <div>
                 <div className="xl:w-96">
@@ -125,7 +126,7 @@ const Products = () => {
               {/* Sort Products by Price */}
               <div>
                 Sort Products by Price
-                <select className="mx-3 px-3 border-solid border-2 border-primary-bg text-primary-text rounded-xl" name="price" id="price" onChange={(e) => sortProductsByPrice(e)}>
+                <select className="mx-3 px-3 border-solid border-2 rounded-xl" name="price" id="price" onChange={(e) => sortProductsByPrice(e)}>
                   <option value="LowToHigh">Low to High</option>
                   <option value="HighToLow">High to Low</option>
                 </select>
@@ -148,7 +149,7 @@ const Products = () => {
 
                     {/* Best Selling */}
                     {product.bestSelling ? 
-                      <div className="absolute top-3 right-3 px-3 bg-primary-bg text-white rounded-xl">
+                      <div className="absolute top-3 right-3 px-3 bg-slate-700 text-white rounded-xl">
                         Best Selling
                       </div>
                       : 
@@ -161,10 +162,13 @@ const Products = () => {
                         <a>
                           <span aria-hidden="true" className="absolute inset-0" />
                           {product.productName}
-                          
                         </a>
                       </h3>
-                      <p className="text-gray-600">{`$${product.productPrice}`}</p>
+
+                      <div className="flex items-center">
+                        <p className="text-gray-600">{`$${product.productPrice}`}</p>
+                        <img src="./assets/star.png" alt="Star" className="w-6 h-6 ml-auto mr-2 text-gray-600" />{product.rating}
+                      </div>
                     </div>
                   </div>
                 )
@@ -180,10 +184,20 @@ const Products = () => {
     <>
       <Navbar isMenu={true} isContact={false} isAbout={false} />
       <div className="bg-white font-poppins">
-        <div className="mx-auto max-w-2xl px-4 py-20 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">          
+        {/* Wallpaper */}
+        <div className="relative">
+          <img src="./assets/wallpaper.jpg" alt="" className="h-52 lg:h-96 w-full object-cover" />
+          <p className="absolute top-8 left-8">Coffee is here.</p>
+        </div>
+
+        <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">          
           {/* Category Tabs */}
-          <h2 className="text-2xl font-bold tracking-tight text-primary-text mb-5">Categories</h2>
-          <div className="grid grid-cols-6 mb-10">
+          <div className="mb-5 flex flex-col gap-y-1">
+            <h2 className="text-2xl font-bold tracking-tight">Categories</h2>
+            <p>Select any category to find the products.</p>
+          </div>
+
+          <div className="flex gap-x-5 overflow-x-scroll mb-10">
             {categoryNav}
           </div>
 

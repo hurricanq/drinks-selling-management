@@ -14,7 +14,7 @@ const Navbar = (props) => {
     const navigation = [
         { name: 'Menu', href: '/products', current: props.isMenu },
         { name: 'Contact', href: '/contact', current: props.isContact },
-        { name: 'About Us', href: '#', current: props.isAbout }
+        { name: 'About Us', href: '/about', current: props.isAbout }
     ]
 
     const [totalQuantity, setTotalQuantity] = useState(0)
@@ -60,7 +60,7 @@ const Navbar = (props) => {
                                     to={item.href}
                                     aria-current={item.current ? 'page' : undefined}
                                     className={classNames(
-                                    item.current ? 'bg-primary-text text-white' : 'hover:bg-primary-text hover:text-white transition-colors',
+                                    item.current ? 'bg-slate-700 text-white' : 'hover:bg-slate-700 hover:text-white transition-colors',
                                     'rounded-md px-3 py-2 text-sm font-medium',
                                     )}
                                 >

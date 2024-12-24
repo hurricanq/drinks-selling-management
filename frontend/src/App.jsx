@@ -6,6 +6,7 @@ import Checkout from './pages/Checkout'
 import Shipping from './pages/Shipping'
 import Successful from './pages/Successful'
 import Contact from './pages/Contact'
+import AboutUs from "./pages/AboutUs"
 import SignIn from './pages/SignIn'
 import LogIn from './pages/LogIn'
 import UserProfile from "./pages/UserProfile"
@@ -31,6 +32,7 @@ function App() {
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/successful" element={<Successful />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/profile" element={<UserProfile />} />
         <Route path="/edit-profile" element={<EditProfile />} />
         <Route path="/admin" element={<AdminHome />} />

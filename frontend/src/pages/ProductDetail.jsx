@@ -10,68 +10,9 @@ import { addToCart } from '../stores/cartSlice'
 
 import axios from 'axios'
 
+import { Rating } from "@material-tailwind/react";
+
 const styles = {
-    productImage: {
-        width: '300px',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1rem',
-    },
-    thumbnail: {
-        display: 'flex',
-        gap: '0.5rem',
-    },
-    thumbnailImage: {
-        width: '50px',
-        height: '50px',
-        cursor: 'pointer',
-        border: '2px solid transparent',
-    },
-    selectedThumbnail: {
-        border: '2px solid #ffd43b',
-    },
-    productDetails: {
-        flex: 1,
-        padding: '1.5rem',
-        borderRadius: '12px',
-        boxShadow: '0 10px 20px rgba(0, 0, 0, 0.1)',
-    },
-    title: {
-        fontSize: '1.75rem',
-        fontWeight: '600',
-        color: '#333',
-        marginBottom: '1rem',
-    },
-    rating: {
-        display: 'flex',
-        alignItems: 'center',
-        fontSize: '0.875rem',
-        color: '#888',
-        marginBottom: '1rem',
-    },
-    priceBox: {
-        backgroundColor: '#f9f9f9',
-        padding: '1rem',
-        borderRadius: '8px',
-        marginBottom: '1rem',
-    },
-    price: {
-        fontSize: '1.5rem',
-        fontWeight: '700',
-        color: '#333',
-    },
-    addToCartButton: {
-        backgroundColor: '#a855f7',
-        color: '#fff',
-        padding: '0.75rem 1.5rem',
-        borderRadius: '8px',
-        fontWeight: '600',
-        fontSize: '1rem',
-        border: 'none',
-        cursor: 'pointer',
-        marginTop: '1rem',
-        width: '100%',
-    },
     tabs: {
         display: 'flex',
         gap: '1rem',
@@ -84,12 +25,9 @@ const styles = {
         fontSize: '1rem',
     },
     activeTab: {
-        borderBottom: '2px solid #6b21a8',
+        borderBottom: '2px solid black',
         fontWeight: '600',
-    },
-    tabContent: {
-        marginTop: '1rem',
-    },
+    }
 };
 
 const ProductDetail = () => {
@@ -116,7 +54,7 @@ const ProductDetail = () => {
     const [activeTab, setActiveTab] = useState('Description')
     const [reviews, setReviews] = useState([])
     const [inputReview, setInputReview] = useState({
-        userId: 7,
+        userId: 8,
         productId: info.id,
         reviewContent: "",
         reviewDate: curDate
@@ -211,9 +149,9 @@ const ProductDetail = () => {
                         <Link to="/products" className="hover:text-primary-bg transition-colors">Menu</Link> &gt; {info.category} &gt; <span className="font-semibold">{info.name}</span> 
                     </div>
                     <div className="flex flex-col justify-center">
-                        <div className="flex gap-5">
+                        <div className="flex flex-col lg:flex-row gap-5">
                             {/* Product Image Section */}
-                            <div className="self-start w-96 object-cover shadow-xl">
+                            <div className="self-start w-52 lg:w-96 object-cover shadow-xl">
                                 <img src={`./assets/${info.image}`} alt="Product" className="rounded-xl"/>   
                             </div>
 
@@ -222,13 +160,21 @@ const ProductDetail = () => {
                                 <h2 className="text-3xl font-bold mb-2">{info.name}</h2>
                                 <p className="text-2xl font-bold mb-2 text-primary-text">{`$${price}`}</p>
 
-                                <div>
+                                <p className="text-green-600">In Stock</p>
+                                <div className="my-3">
                                     <p className="mb-2">Choose a size:</p>
                                     <select style={{ padding: '0.5rem', borderRadius: '4px', border: '1px solid #ddd' }} onClick={handleOption}>
                                         <option>L (+ $0)</option>
                                         <option>XL (+ $0.5)</option>
                                     </select>
                                 </div>
+
+                                <div className="my-6 flex items-center gap-x-3">
+                                    <p>Rate the product!</p>
+                                    <Rating value={4} />
+                                </div>
+
+
 
                                 <div className="flex items-center justify-center gap-2">
                                     <button className="bg-gray-100 h-full w-10 font-bold text-xl rounded-xl flex items-center justify-center" onClick={handleMinusQuantity}>
@@ -240,7 +186,7 @@ const ProductDetail = () => {
                                     </button>
                                 </div>
 
-                                <button style={styles.addToCartButton} className="hover:opacity-80 transition-opacity" onClick={handleAddToCart}>Add to cart</button>
+                                <button className="w-full mt-6 px-3 py-1 border-solid border-2 border-slate-700 rounded-xl hover:bg-slate-700 hover:text-white transition-colors" onClick={handleAddToCart}>Add to cart</button>
                             </div>
                         </div>
                     </div>
@@ -259,7 +205,7 @@ const ProductDetail = () => {
                     </div>
 
                     {/* Tab Content */}
-                    <div style={styles.tabContent}>
+                    <div className="mt-3">
                         {activeTab === 'Description' && (
                         <p>{info.desc}</p>
                         )}
@@ -268,7 +214,7 @@ const ProductDetail = () => {
                         <div>
                             <div className="my-5 flex gap-5">
                                 <input type="text" placeholder="Submit a review here..." className="px-5" name="reviewContent" onChange={handleChange} />
-                                <button className="bg-primary-bg text-white hover:opacity-80 transition-opacity py-2 px-5 rounded-lg" onClick={handleSubmitReview}>Submit</button>
+                                <button className="bg-slate-700 text-white hover:opacity-80 transition-opacity py-2 px-5 rounded-lg" onClick={handleSubmitReview}>Submit</button>
                             </div>
 
                             <h3 className="text-xl font-bold mb-2.5">{`${totalReviews} Review${totalReviews == 1 ? '' : 's'}`}</h3>
@@ -279,13 +225,13 @@ const ProductDetail = () => {
                         {activeTab === 'Similar Products' && (
                             <div className="flex gap-x-6 overflow-x-scroll items-center">
                                 {products.map(product => (
-                                <div className="flex flex-col gap-y-2 bg-gray-200 p-3 rounded-xl">
+                                <div key={product.id} className="flex flex-col gap-y-2 bg-gray-200 p-3 rounded-xl">
                                     <div className="">
                                         <img src={`./assets/${product.productImage}`} alt="Product" className="min-w-52 object-cover rounded-xl cursor-pointer" />
                                     </div>
 
                                     <h3 className="font-bold text-xl">{product.productName}</h3>
-                                    <p>{product.productPrice}</p>
+                                    <p>${product.productPrice}</p>
                                 </div>
                                 ))}
                             </div>

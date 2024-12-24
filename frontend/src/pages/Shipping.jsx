@@ -62,6 +62,7 @@ const ShippingPage = () => {
     }
 
     const handleSendEmail = async (e) => {
+        /*
         e.preventDefault()
 
         try {
@@ -75,6 +76,9 @@ const ShippingPage = () => {
             console.error('Error when sending email:', error);
             alert("Error!");
         }
+        */
+
+        navigate("/successful")
     }
 
     const subt = (items, propP, propQ) => {

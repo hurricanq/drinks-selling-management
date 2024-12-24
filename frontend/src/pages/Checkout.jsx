@@ -62,17 +62,17 @@ const CheckOut = () => {
         <div>
             <Navbar isMenu={false} isContact={false} isAbout={false} />
             <div className="font-poppins mx-auto max-w-2xl min-h-screen px-4 py-20 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                <div className="flex gap-3">
+                <div className="flex flex-col lg:flex-row gap-5">
                     {/* Product List */}
                     {cart.items.length === 0 ? (
-                        <div className="flex-1 shadow-lg p-3 rounded-xl">
+                        <div className="flex-1 shadow-md p-3 rounded-xl">
                             <p>Your cart is empty! <Link to="/products" className="text-primary-text hover:text-primary-bg">Go to Menu</Link></p>
                         </div>
                     ) : (
-                        <div className="flex-1 shadow-lg p-3 rounded-xl">
+                        <div className="flex-1 shadow-md p-3 rounded-xl">
                             <div className="flex justify-between">
-                                <h1 className="text-2xl font-bold mb-5 text-primary-text">Your Cart</h1>
-                                <button onClick={handleOpenClear} className="px-3 border-solid border-2 border-primary-bg hover:bg-primary-bg hover:text-white transition-colors rounded-xl">Clear Cart</button>
+                                <h1 className="text-2xl font-bold mb-5">Your Cart</h1>
+                                <button onClick={handleOpenClear} className="px-3 border-solid border-2 border-slate-700 hover:bg-slate-700 hover:text-white transition-colors rounded-xl">Clear Cart</button>
 
                                 {/* Confirm before redirecting to the successful page */}
                                 <Dialog open={open} onClose={setOpen} className="relative z-10">
@@ -167,7 +167,7 @@ const CheckOut = () => {
                                 <span>Total</span>
                                 <span className="font-bold text-lg">${total.toFixed(2)}</span>
                             </div>
-                            <div className="text-center px-3 py-1 border-solid border-2 border-primary-bg hover:bg-primary-bg hover:text-white transition-colors rounded-xl"><button onClick={handleContinue}>Continue to checkout</button></div>
+                            <div className="text-center px-3 py-1 border-solid border-2 border-slate-700 hover:bg-slate-700 hover:text-white transition-colors rounded-xl"><button onClick={handleContinue}>Continue to checkout</button></div>
                         </div>
                     </div>
                 </div>
