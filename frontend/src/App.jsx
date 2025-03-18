@@ -1,52 +1,71 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom"
-import Home from "./pages/Home"
-import Products from "./pages/Products"
-import ProductDetail from './pages/ProductDetail'
-import Checkout from './pages/Checkout'
-import Shipping from './pages/Shipping'
-import Successful from './pages/Successful'
-import Contact from './pages/Contact'
-import AboutUs from "./pages/AboutUs"
-import SignIn from './pages/SignIn'
-import LogIn from './pages/LogIn'
-import UserProfile from "./pages/UserProfile"
-import EditProfile from "./pages/EditProfile"
+import { useEffect } from "react";
+import { Navigate, Routes, Route } from "react-router-dom"
 
-import AdminHome from "./pages/AdminHome"
-import AdminProducts from "./pages/AdminProducts"
-import AdminUpdate from "./pages/AdminUpdate"
+import HomePage from "./pages/HomePage"
 
-import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css'; // Import default CSS for toastify
+import SignUpPage from './pages/SignUpPage'
+import LogInPage from './pages/LogInPage'
+
+import ContactPage from './pages/ContactPage'
+import AboutUsPage from "./pages/AboutUsPage"
+
+import MenuPage from "./pages/MenuPage"
+import DrinkDetailPage from "./pages/DrinkDetailPage"
+
+import CheckoutPage from "./pages/CheckoutPage"
+import SuccessfulPage from "./pages/SuccessfulPage"
+
+import ProfilePage from "./pages/ProfilePage"
+
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import LoadingSpinner from "./components/LoadingSpinner";
+
+import { Toaster } from "react-hot-toast";
+
+import { useUserStore } from "./stores/useUserStore"
+import { useCartStore } from "./stores/useCartStore"
 
 function App() {
+  const { user, checkAuth, checkingAuth } = useUserStore();
+	const { cart, getCartItems } = useCartStore();
+
+	useEffect(() => {
+		checkAuth();
+	}, [checkAuth]);
+
+	useEffect(() => {
+		if (!user) return;
+
+		getCartItems();
+	}, [getCartItems, user]);
+
+	if (checkingAuth) return <LoadingSpinner />;
+
   return (
     <>
+      <Navbar />
+
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/products" element={<Products />} />
-        <Route path="/productDetail" element={<ProductDetail />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/shipping" element={<Shipping />} />
-        <Route path="/successful" element={<Successful />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/about" element={<AboutUs />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/edit-profile" element={<EditProfile />} />
-        <Route path="/admin" element={<AdminHome />} />
-        <Route path="/admin-products" element={<AdminProducts />} />
-        <Route path="/admin-update/:id" element={<AdminUpdate />} />
+        <Route path="/" element={<HomePage />} />
+
+        <Route path='/signup' element={!user ? <SignUpPage /> : <Navigate to='/' />} />
+        <Route path='/login' element={!user ? <LogInPage /> : <Navigate to='/' />} />
+
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/about" element={<AboutUsPage />} />
+
+        <Route path="/menu" element={<MenuPage />} />
+        <Route path="/drink/:id" element={<DrinkDetailPage />} />
+
+        <Route path="/checkout" element={user ? <CheckoutPage /> : <Navigate to="/" />} />
+        <Route path="/successful" element={user ? <SuccessfulPage /> : <Navigate to="/" />} />
+
+        <Route path="/profile" element={user ? <ProfilePage /> : <Navigate to="/" />} />
       </Routes>
-      <ToastContainer 
-          position="top-center" 
-          autoClose={1000} 
-          hideProgressBar={true} 
-          closeOnClick 
-          // pauseOnHover  
-          theme="colored" 
-        />
+
+      <Footer />
+      <Toaster />
     </>
   )
 }
