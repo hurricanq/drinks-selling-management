@@ -1,0 +1,26 @@
+{
+  "name": "drinks-selling-management",
+  "version": "1.0.0",
+  "description": "- User Authentication System\r - JWT with Refresh/Access Tokens\r - Integrating Redis for Caching, Session Storage\r - Integrating Cloudinary for Avatar Updating",
+  "main": "backend/src/index.js",
+  "scripts": {
+    "dev": "nodemon backend/src/index.js",
+    "start": "node backend/src/index.js",
+    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hurricanq/drinks-selling-management.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/hurricanq/drinks-selling-management/issues"
+  },
+  "homepage": "https://github.com/hurricanq/drinks-selling-management#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}
