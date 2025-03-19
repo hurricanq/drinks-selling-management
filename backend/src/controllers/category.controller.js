@@ -10,6 +10,18 @@ export const getAllCategories = async (req, res) => {
     }
 }
 
+export const getCategory = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const category = await Category.findById(id);
+        res.json({ category });
+    } catch (error) {
+        console.error("Error in getCategory controller: ", error.message);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 export const createCategory = async (req, res) => {
     try {
         const category = await Category.create(req.body);

@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/", createDrink);
 router.get("/", getAllDrinks);
 router.get("/drink/:id", getDrink);
-router.get("/category/:category", getDrinksByCategory);
+router.get("/category/:categoryId", getDrinksByCategory);
 router.delete("/:id", deleteDrink);
 
 router.post("/:id/rate", protectRoute, rateDrink);

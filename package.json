@@ -4,9 +4,8 @@
   "description": "- User Authentication System\r - JWT with Refresh/Access Tokens\r - Integrating Redis for Caching, Session Storage\r - Integrating Cloudinary for Avatar Updating",
   "main": "backend/src/index.js",
   "scripts": {
-    "dev": "nodemon backend/src/index.js",
-    "start": "node backend/src/index.js",
-    "build": "npm install && npm install --prefix frontend && npm run build --prefix frontend"
+    "build": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
+    "start": "npm run start --prefix backend"
   },
   "repository": {
     "type": "git",

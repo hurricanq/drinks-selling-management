@@ -16,7 +16,7 @@ export const getDrink = async (req, res) => {
         const drink = await Drink.findById(req.params.id);
         res.json({ drink });
     } catch (error) {
-        console.error("Error in getAllDrinks controller: ", error.message);
+        console.error("Error in getDrink controller: ", error.message);
         res.status(500).json({ error: "Internal server error" });
     }
 }
@@ -40,9 +40,10 @@ export const createDrink = async (req, res) => {
 }
 
 export const getDrinksByCategory = async (req, res) => {
-	const { category } = req.params;
+	const { categoryId } = req.params;
+
 	try {
-		const drinks = await Drink.find({ category });
+		const drinks = await Drink.find({ categoryId })
 		res.json({ drinks });
 	} catch (error) {
 		console.log("Error in getDrinksByCategory controller", error.message);

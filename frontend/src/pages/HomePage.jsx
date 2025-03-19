@@ -3,6 +3,8 @@ import React from 'react';
 import CarouselComponent from "../components/CarouselComponent";
 import ButtonComponent from "../components/ButtonComponent";
 
+import { motion } from "framer-motion";
+
 const HomePage = () => {
     const featuredCategories = [
         {
@@ -20,7 +22,7 @@ const HomePage = () => {
             desc: "Slushy or solid, depending on the desired consistency. Popular for refreshing summer beverages and enhancing texture and flavor.",
             image: "./assets/freezeCategory.png"
         }
-    ]
+    ];
 
     return (
         <div>
@@ -36,7 +38,13 @@ const HomePage = () => {
                     <div className="grid grid-cols-3 gap-10 mt-3">
                         {featuredCategories.map(category => {
                             return (
-                                <div key={category.name}>
+                                <motion.div
+                                    key={category.name}
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 1.0, ease: "easeOut" }}
+                                >
                                     <div className="w-full overflow-hidden">
                                         <img src={category.image} alt="" className="hover:scale-110 transition-transform" />
                                     </div>
@@ -44,7 +52,7 @@ const HomePage = () => {
                                         <h2 className="text-lg font-bold">{category.name}</h2>
                                         <p className="text-gray-700">{category.desc}</p>
                                     </div>
-                                </div>
+                                </motion.div>
                             )
                         })}
                     </div>
@@ -55,7 +63,13 @@ const HomePage = () => {
             <div className="mt-10 py-10 ">
                 <div className="mx-auto max-w-7xl flex flex-col lg:flex-row items-center justify-between">
                     {/* Left Section */}
-                    <div className="md:w-1/2 text-center md:text-left flex flex-col gap-5 lg:pr-10">
+                    <motion.div
+                        className="md:w-1/2 text-center md:text-left flex flex-col gap-5 lg:pr-10"
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 1.0, ease: "easeOut" }}
+                    >
                         <h1 className="text-3xl font-bold">
                             About Us
                         </h1>
@@ -63,16 +77,22 @@ const HomePage = () => {
                             We serve freshly brewed coffee, espresso-based drinks, and other beverages like tea and hot chocolate. The store offers a cozy atmosphere where customers can relax, work, or socialize.
                         </p>
                         <ButtonComponent name="Learn more" />
-                    </div>
+                    </motion.div>
 
                     {/* Right Section */}
-                    <div className="md:w-1/2 mt-8 md:mt-0 relative">
+                    <motion.div
+                        className="md:w-1/2 mt-8 md:mt-0 relative"
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 1.0, ease: "easeOut" }}
+                    >
                         <img
                             src='./assets/coffeeShop.jpg'
                             alt="Coffee"
                             className="w-full rounded-lg"
                         />
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </div>
