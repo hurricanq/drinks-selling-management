@@ -14,7 +14,7 @@ const SlideOverCart = () => {
     const { cart, subtotal, isOpen, removeFromCart, updateQuantity, toggleCart } = useCartStore();
 
     return (
-        <Dialog open={isOpen} onClose={toggleCart} className="relative z-10">
+        <Dialog open={isOpen} onClose={toggleCart} className="relative z-50">
             <DialogBackdrop
                 transition
                 className="fixed inset-0 bg-gray-500/75 transition-opacity duration-500 ease-in-out data-closed:opacity-0"
@@ -71,13 +71,13 @@ const SlideOverCart = () => {
                                                                     <div className="flex items-center gap-3">
                                                                         <p className="text-gray-500">Quantity: {item.quantity}</p>
                                                                         <button
-                                                                            className="bg-gray-400 w-8 p-1 rounded-xl font-bold"
+                                                                            className="bg-primary-text text-white hover:opacity-70 w-8 p-1 rounded-xl font-bold"
                                                                             onClick={() => updateQuantity(item._id, item.quantity + 1)}
                                                                         >
                                                                             +
                                                                         </button>
                                                                         <button
-                                                                            className="bg-gray-400 w-8 p-1 rounded-xl font-bold"
+                                                                            className="bg-primary-text text-white hover:opacity-70 w-8 p-1 rounded-xl font-bold"
                                                                             onClick={() => updateQuantity(item._id, item.quantity - 1)}
                                                                         >
                                                                             -
@@ -88,7 +88,7 @@ const SlideOverCart = () => {
                                                                     <div className="flex">
                                                                         <button
                                                                             type="button"
-                                                                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                                            className="font-medium text-red-400 hover:text-red-300"
                                                                             onClick={() => removeFromCart(item._id)}
                                                                         >
                                                                             Remove
@@ -114,7 +114,7 @@ const SlideOverCart = () => {
                                         <div className="mt-6">
                                             <Link
                                                 to="/checkout"
-                                                className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
+                                                className="flex items-center justify-center rounded-md border border-transparent bg-primary-text px-6 py-3 text-base font-medium text-white shadow-xs hover:opacity-70 transition-opacity"
                                             >
                                                 Checkout
                                             </Link>
@@ -125,7 +125,7 @@ const SlideOverCart = () => {
                                                 <button
                                                 type="button"
                                                 onClick={() => setOpen(false)}
-                                                className="font-medium text-indigo-600 hover:text-indigo-500"
+                                                className="font-medium text-primary-text hover:text-brown-400 transition-colors"
                                                 >
                                                 Continue Shopping
                                                 <span aria-hidden="true"> &rarr;</span>

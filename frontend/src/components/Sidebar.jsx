@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useCategoryStore } from "../stores/useCategoryStore";
 
@@ -6,8 +6,7 @@ import { Card, Typography, List, ListItem, ListItemPrefix } from "@material-tail
 import { HeartIcon } from "@heroicons/react/24/solid";
 
 const Sidebar = () => {
-    const { fetchAllCategories, categories, isLoading } = useCategoryStore();
-    const [selectedCategory, setSelectedCategory] = useState(null);
+    const { fetchAllCategories, categories, selectedCategory, setSelectedCategory, isLoading } = useCategoryStore();
 
 	useEffect(() => {
 		fetchAllCategories();
@@ -26,11 +25,11 @@ const Sidebar = () => {
                         <ListItem
                             key={category._id}
                             className={`${
-                                selectedCategory === category._id
+                                selectedCategory._id === category._id
                                     ? "bg-blue-500 text-white" // Highlighted style
                                     : "hover:bg-gray-200"
                                 }`}
-                            onClick={() => setSelectedCategory(category._id)}
+                            onClick={() => setSelectedCategory(category)}
                         >
                             <ListItemPrefix>
                                 <HeartIcon className="h-5 w-5" />

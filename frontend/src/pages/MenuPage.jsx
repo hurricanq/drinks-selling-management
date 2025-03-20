@@ -2,14 +2,18 @@ import React, { useEffect } from 'react';
 import { Link } from "react-router-dom";
 
 import { useDrinkStore } from "../stores/useDrinkStore";
+import { useCategoryStore } from "../stores/useCategoryStore";
 import { useSearchStore } from "../stores/useSearchStore";
 
+import LoadingSpinner from "../components/LoadingSpinner"
 import Sidebar from "../components/Sidebar";
 import InputSearch from "../components/InputSearch";
 import CardComponent from '../components/CardComponent';
 
 const MenuPage = () => {
-    const { fetchAllDrinks, drinks, isLoading } = useDrinkStore();
+    const { fetchAllDrinks, drinks, loading } = useDrinkStore();
+    const { selectedCategory } = useCategoryStore();
+
     const { searchQuery } = useSearchStore();
     
     useEffect(() => {
@@ -17,9 +21,11 @@ const MenuPage = () => {
     }, [fetchAllDrinks]);
 
     // Filter drinks based on search query
-    const filteredDrinks = drinks.filter((drink) =>
+    const filteredDrinks = drinks.filter(drink =>
         drink.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    ).filter(drink => String(drink.categoryId) === String(selectedCategory._id));
+
+    if (loading) return <LoadingSpinner />;
 
     return (
         <div>

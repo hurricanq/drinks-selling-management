@@ -57,7 +57,7 @@ const HomePage = () => {
                     
                     {/* Right Section */}
                     <motion.div
-                        className="md:w-1/2"
+                        className="md:w-1/2 aspect-square"
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
@@ -82,7 +82,7 @@ const HomePage = () => {
                                     viewport={{ once: true, margin: "-100px" }}
                                     transition={{ duration: 1.0, ease: "easeOut" }}
                                 >
-                                    <div className="w-full overflow-hidden">
+                                    <div className="w-full overflow-hidden aspect-square">
                                         <img src={category.image} alt="" className="hover:scale-110 transition-transform" />
                                     </div>
                                     <div className="flex flex-col text-center gap-3 mt-3">
@@ -124,7 +124,7 @@ const HomePage = () => {
 
                     {/* Right Section */}
                     <motion.div
-                        className="md:w-1/2 mt-8 md:mt-0 relative"
+                        className="md:w-1/2 mt-8 md:mt-0 relative aspect-auto"
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}

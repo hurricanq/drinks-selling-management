@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div class="font-outfit">
-      <div className="bg-white sticky top-0 z-50">
+      <div className="bg-white sticky top-0 z-40">
         <Navbar />
       </div>
 

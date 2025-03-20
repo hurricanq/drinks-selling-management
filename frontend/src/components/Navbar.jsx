@@ -44,7 +44,7 @@ const Navbar = () => {
                             <Link to="/">
                                 <img
                                     alt="Your Company"
-                                    src="./assets/logo.png"
+                                    src="../assets/logo.png"
                                     className="h-12 w-auto"
                                 />
                             </Link>

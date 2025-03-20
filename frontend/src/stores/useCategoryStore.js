@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 
 export const useCategoryStore = create((set) => ({
     categories: [],
+	selectedCategory: [{ _id: "67dbdcc04a75c342d13df9b6", name: "Coffee"}],
     loading: false,
 
 	setCategories: (categories) => set({ categories }),
@@ -46,4 +47,6 @@ export const useCategoryStore = create((set) => ({
 			toast.error(error.response.data.error || "Failed to delete category");
 		}
 	},
+
+	setSelectedCategory: (category) => set({ selectedCategory: category }),
 }));
