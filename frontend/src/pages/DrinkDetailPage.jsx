@@ -48,30 +48,30 @@ const DrinkDetailPage = () => {
     return (
         <div>
             <div className="mx-auto max-w-7xl py-10 gap-5">
-                <div className="w-full p-4 shadow-xl shadow-blue-gray-900/5 rounded-xl flex flex-col lg:flex-row justify-between gap-10">
+                <div className="w-full p-4 rounded-xl flex flex-col lg:flex-row justify-between gap-10">
                     {/* Left Section */}
                     <div className="md:w-1/2 mt-8 md:mt-0 relative">
                         <img src={`../assets/${drink.image}`} alt="" className="w-full rounded-xl" />
                     </div>
 
                     {/* Right Section */}
-                    <div className="md:w-1/2 text-center md:text-left lg:pr-10 mt-10">
-                        <div className="flex flex-col gap-3">
+                    <div className="md:w-1/2 text-center md:text-left lg:pr-10">
+                        <div>
                             <h1 className="text-3xl font-bold">
                                 {drink.name}
                             </h1>
-                            <div className="flex justify-between items-center">
-                                <p className="text-2xl font-bold">
+                            <p className="text-lg mt-3">
+                                {drink.avgRating?.toFixed(1)} ⭐ ({drink.numRatings} ratings)
+                            </p>
+                            <div className="flex justify-between items-center mt-5">
+                                <p className="text-4xl font-bold">
                                     ${drink.price}
                                 </p> 
-                                <p className="text-2xl font-bold">
-                                    {drink.avgRating?.toFixed(1)} ⭐ ({drink.numRatings} ratings)
-                                </p>
                             </div>
                         </div>
-
-                        <div className="mt-5 border-2 border-black rounded-lg p-3 flex flex-col items-center gap-3">
-                            <h2 className="text-lg font-bold">Rate the Drink!</h2>
+                        <hr className="my-5"></hr>
+                        <div className="p-3 flex flex-col gap-3">
+                            <h2 className="text-lg">Rate the Drink!</h2>
 
                             <form onSubmit={submitRating} className="flex items-center gap-3">
                                 <select value={userRating} onChange={(e) => setUserRating(e.target.value)}>

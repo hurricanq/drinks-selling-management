@@ -1,7 +1,10 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 import CarouselComponent from "../components/CarouselComponent";
 import ButtonComponent from "../components/ButtonComponent";
+
+import { ArrowLongRightIcon } from "@heroicons/react/24/solid"
 
 import { motion } from "framer-motion";
 
@@ -26,15 +29,49 @@ const HomePage = () => {
 
     return (
         <div>
-            {/* Carousel */}
-            <div className="h-96 pt-5 px-10">
-                <CarouselComponent />
-            </div>
+            {/* Hero */}
+            <div className="bg-primary-bg">
+                <div className="relative mx-auto max-w-7xl px-10 lg:px-1 py-10 lg:py-1 flex flex-col lg:flex-row items-center">
+                    {/* Left Section */}
+                    <motion.div
+                        className="md:w-1/2"
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 2.0, ease: "easeOut" }}
+                    >
+                        <div className="flex flex-col text-center lg:text-left gap-3">
+                            <h1 className="text-5xl lg:text-7xl font-bold text-primary-text">Enormous store <br /> of drinks!</h1>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget metus mi. Etiam iaculis, arcu viverra ullamcorper egestas, quam urna ornare est, vel tristique ligula nulla id elit.</p>
+                        </div>
+
+                        <div className="mt-5">
+                            <Link to="/menu">
+                                <button className="bg-primary-text px-5 py-2 rounded-xl text-white text-lg flex items-center gap-2 hover:opacity-70 transition-opacity">
+                                    Visit menu 
+                                    <ArrowLongRightIcon className="h-5"/>
+                                </button>
+                            </Link>
+                        </div>
+                    </motion.div>
+                    
+                    {/* Right Section */}
+                    <motion.div
+                        className="md:w-1/2"
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
+                        transition={{ duration: 2.0, ease: "easeOut" }}
+                    >
+                        <img src="./assets/home.png" alt="" />
+                    </motion.div>
+                </div>
+            </div> 
 
             {/* Our Menu (Categories) */}
-            <div className="mt-10 py-10">
-                <div className="mx-auto max-w-7xl flex flex-col items-center">
-                    <h1 className="font-bold text-3xl">Our Menu</h1>
+            <div className="py-10">
+                <div className="mx-auto max-w-7xl px-10 lg:px-1 flex flex-col items-center">
+                    <h1 className="text-3xl font-bold text-primary-text">Our Menu</h1>
                     <div className="grid grid-cols-3 gap-10 mt-3">
                         {featuredCategories.map(category => {
                             return (
@@ -49,7 +86,7 @@ const HomePage = () => {
                                         <img src={category.image} alt="" className="hover:scale-110 transition-transform" />
                                     </div>
                                     <div className="flex flex-col text-center gap-3 mt-3">
-                                        <h2 className="text-lg font-bold">{category.name}</h2>
+                                        <h2 className="text-lg font-bold text-primary-text">{category.name}</h2>
                                         <p className="text-gray-700">{category.desc}</p>
                                     </div>
                                 </motion.div>
@@ -60,8 +97,8 @@ const HomePage = () => {
             </div>
 
             {/* About Us */}
-            <div className="mt-10 py-10 ">
-                <div className="mx-auto max-w-7xl flex flex-col lg:flex-row items-center justify-between">
+            <div className="py-10">
+                <div className="mx-auto max-w-7xl px-10 lg:px-1 flex flex-col lg:flex-row items-center justify-between">
                     {/* Left Section */}
                     <motion.div
                         className="md:w-1/2 text-center md:text-left flex flex-col gap-5 lg:pr-10"
@@ -70,13 +107,19 @@ const HomePage = () => {
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 1.0, ease: "easeOut" }}
                     >
-                        <h1 className="text-3xl font-bold">
+                        <h1 className="text-3xl font-bold text-primary-text">
                             About Us
                         </h1>
                         <p className="text-gray-700 text-lg">
                             We serve freshly brewed coffee, espresso-based drinks, and other beverages like tea and hot chocolate. The store offers a cozy atmosphere where customers can relax, work, or socialize.
                         </p>
-                        <ButtonComponent name="Learn more" />
+
+                        <Link to="/about">
+                            <button className="bg-primary-text px-5 py-2 rounded-xl text-white text-lg flex items-center gap-2 hover:opacity-70 transition-opacity">
+                                Learn more 
+                                <ArrowLongRightIcon className="h-5"/>
+                            </button>
+                        </Link>
                     </motion.div>
 
                     {/* Right Section */}

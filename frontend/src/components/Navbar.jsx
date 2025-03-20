@@ -8,7 +8,6 @@ import SlideOverCart from "./SlideOverCart";
 
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
-import { Button } from "@material-tailwind/react";
 
 const navigation = [
     { name: 'Menu', href: '/menu', current: false },
@@ -32,7 +31,7 @@ const Navbar = () => {
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         {/* Mobile menu button*/}
-                        <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
+                        <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-primary-text hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Open main menu</span>
                             <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
@@ -40,13 +39,13 @@ const Navbar = () => {
                         </DisclosureButton>
                     </div>
                     
-                    <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                    <div className="flex flex-1 items-center justify-center sm:justify-start">
                         <div className="flex shrink-0 items-center">
                             <Link to="/">
                                 <img
                                     alt="Your Company"
-                                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                                    className="h-8 w-auto"
+                                    src="./assets/logo.png"
+                                    className="h-12 w-auto"
                                 />
                             </Link>
                         </div>
@@ -58,7 +57,7 @@ const Navbar = () => {
                                         href={item.href}
                                         aria-current={item.current ? 'page' : undefined}
                                         className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'hover:bg-gray-700 hover:text-white transition-colors',
+                                        item.current ? 'bg-primary-text text-white' : 'hover:bg-primary-text hover:text-white transition-colors',
                                         'rounded-md px-3 py-2 text-sm font-medium',
                                         )}
                                     >
@@ -75,7 +74,7 @@ const Navbar = () => {
                                 {/* Cart */}
                                 <button
                                     type="button"
-                                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                                    className="relative rounded-full bg-primary-text p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                                     onClick={toggleCart}
                                 >
                                     <span className="absolute -inset-1.5" />
@@ -95,7 +94,7 @@ const Navbar = () => {
                                 {/* Notifications */}
                                 <button
                                     type="button"
-                                    className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
+                                    className="relative rounded-full bg-primary-text p-1 text-gray-400 hover:text-white focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden"
                                 >
                                     <span className="absolute -inset-1.5" />
                                     <span className="sr-only">View notifications</span>
@@ -141,12 +140,10 @@ const Navbar = () => {
                             </>
                         ) : (
                             <>
-                                <Link to="/signup">
-                                    <Button>Sign Up</Button>
-                                </Link>
-
                                 <Link to="/login">
-                                    <Button>Log In</Button>
+                                    <button className="bg-primary-text px-5 py-2 rounded-xl text-white flex items-center gap-2 hover:opacity-70 transition-opacity">
+                                        Log in 
+                                    </button> 
                                 </Link>
                             </>
                         )}

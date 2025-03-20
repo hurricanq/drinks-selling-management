@@ -10,11 +10,11 @@ export default withMT({
   theme: {
     extend: {
       fontFamily: {
-        "poppins": "Poppins"
+        "outfit": "Outfit",
       },
       colors: {
-        "primary-text": "#6b21a8",
-        "primary-bg": "#a855f7"
+        "primary-text": "#4e342e",
+        "primary-bg": "#d7ccc8"
       }
     },
   },

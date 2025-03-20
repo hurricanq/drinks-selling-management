@@ -43,8 +43,10 @@ function App() {
 	if (checkingAuth) return <LoadingSpinner />;
 
   return (
-    <>
-      <Navbar />
+    <div class="font-outfit">
+      <div className="bg-white sticky top-0 z-50">
+        <Navbar />
+      </div>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -66,7 +68,7 @@ function App() {
 
       <Footer />
       <Toaster />
-    </>
+    </div>
   )
 }
 
