@@ -13,8 +13,8 @@ const CheckoutPage = () => {
     const [orderInfo, setOrderInfo] = useState({
         username: user.username,
         email: user.email,
-        phoneNumber: user.phoneNumber,
-        address: "HCM"
+        phoneNumber: String(user.phoneNumber),
+        address: ""
     })
 
     const handlePayment = async (e) => {
@@ -76,18 +76,33 @@ const CheckoutPage = () => {
                 </div>
                 
                 <div className="md:w-1/2 p-4 shadow-xl shadow-blue-gray-900/5 rounded-xl">
-                    <h1 className="text-2xl font-bold">Order Summary</h1>
+                    <div>
+                        <h1 className="text-2xl font-bold">Address</h1>
+                        <input
+                            id="address"
+                            name="address"
+                            type="text"
+                            required
+                            placeholder="Enter your address here..."
+                            onChange={(e) => setOrderInfo(prev => ({...prev, [e.target.name]: e.target.value}))}
+                            className="mt-3 rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-primary-text sm:text-sm/6"
+                        /> 
+                    </div>
 
-                    {/* Prices */}
-                    <div className="flex flex-col gap-3 mt-5">
-                        <div className="flex justify-between items-center">
-                            <p>Subtotal:</p>
-                            <p className="text-xl font-bold">${subtotal}</p>
-                        </div>
-                        <hr />
-                        <div className="flex justify-between items-center">
-                            <p>Total:</p>
-                            <p className="text-xl font-bold">${total}</p>
+                    <div className="mt-5">
+                        <h1 className="text-2xl font-bold">Order Summary</h1>
+
+                        {/* Prices */}
+                        <div className="flex flex-col gap-3 mt-3">
+                            <div className="flex justify-between items-center">
+                                <p>Subtotal:</p>
+                                <p className="text-xl font-bold">${subtotal}</p>
+                            </div>
+                            <hr />
+                            <div className="flex justify-between items-center">
+                                <p>Total:</p>
+                                <p className="text-xl font-bold">${total}</p>
+                            </div>
                         </div>
                     </div>
 

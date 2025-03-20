@@ -7,7 +7,6 @@ import path from "path";
 import authRoutes from "./routes/auth.route.js";
 import categoryRoutes from "./routes/category.route.js";
 import drinkRoutes from "./routes/drink.route.js";
-import reviewRoutes from "./routes/review.route.js";
 import cartRoutes from "./routes/cart.route.js";
 import paymentRoutes from "./routes/payment.route.js";
 
@@ -33,7 +32,6 @@ app.use(
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/drinks", drinkRoutes);
-app.use("/api/reviews", reviewRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/payment", paymentRoutes);
 

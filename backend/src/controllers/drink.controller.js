@@ -77,6 +77,7 @@ export const deleteDrink = async (req, res) => {
     }
 }
 
+// API for Rating
 export const rateDrink = async (req, res) => {
     const { rating } = req.body;
     const drink = await Drink.findById(req.params.id);
@@ -105,5 +106,75 @@ export const rateDrink = async (req, res) => {
         res.status(201).json({ message: "Rating submitted", avgRating: drink.avgRating });
     } else {
         res.status(404).json({ message: "Drink not found" });
+    }
+}
+
+// API for Reviews
+export const getAllReviews = async (req, res) => {
+    try {
+        const drink = await Drink.findById(req.params.id);
+
+        if (drink) {
+            res.json({ reviews: drink.reviews });
+        } else {
+            res.status(404).json({ message: "Drink not found." });
+        }
+    } catch (error) {
+        console.error("Error in getAllReviews controller: ", error.message);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+export const createReview = async (req, res) => {
+    try {
+        const { content } = req.body;
+        const drink = await Drink.findById(req.params.id);
+
+        if (drink) {
+            const review = {
+                user: req.user._id,
+                username: req.user.username,
+                profilePic: req.user.profilePic,
+                content,
+            };
+
+            drink.reviews.push(review);
+            drink.numReviews = drink.reviews.length;
+        
+            await drink.save();
+            res.status(201).json({ message: "Review added." });
+        }
+    } catch (error) {
+        console.error("Error in createReview controller: ", error.message);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}
+
+export const deleteReview = async (req, res) => {
+    try {
+        const drink = await Drink.findById(req.params.drinkId);
+
+        if (!drink) {
+          return res.status(404).json({ message: "Drink not found." });
+        }
+    
+        // Find the review
+        const reviewIndex = drink.reviews.findIndex(
+          (r) => r._id.toString() === req.params.reviewId
+        );
+    
+        if (reviewIndex === -1) {
+          return res.status(404).json({ message: "Review not found." });
+        }
+    
+        // Remove the review
+        drink.reviews.splice(reviewIndex, 1);
+        drink.numReviews = drink.reviews.length;
+    
+        await drink.save();
+        res.json({ message: "Review deleted successfully" })
+    } catch (error) {
+        console.error("Error in deleteReview controller: ", error.message);
+        res.status(500).json({ error: "Internal server error" });
     }
 }

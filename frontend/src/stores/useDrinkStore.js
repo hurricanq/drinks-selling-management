@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 export const useDrinkStore = create((set) => ({
 	drinks: [],
 	drink: [],
+	reviews: [],
 	loading: false,
 
 	setDrinks: (drinks) => set({ drinks }),
@@ -68,5 +69,31 @@ export const useDrinkStore = create((set) => ({
 			set({ loading: false });
 			toast.error(error.response.data.error || "Failed to delete drink");
 		}
-	}
+	},
+
+	fetchReviews: async (drinkId) => {
+		set({ loading: true });
+		try {
+			const response = await axios.get(`/drinks/drink/${drinkId}`);
+			set({ reviews: response.data.drink.reviews, loading: false });
+		} catch (error) {
+			set({ error: "Failed to fetch reviews", loading: false });
+			toast.error(error.response.data.error || "Failed to fetch drinks");
+		}
+	},
+
+	createReview: async (drinkId, reviewData) => {
+		set({ loading: true });
+		try {
+			const res = await axios.post(`/drinks/drink/${drinkId}/review`, reviewData);
+			console.log(res.data)
+			set((prevState) => ({
+				reviews: [...prevState.reviews, res.data],
+				loading: false,
+			}));
+		} catch (error) {
+			toast.error(error.response.data.error);
+			set({ loading: false });
+		}
+	},
 }));
