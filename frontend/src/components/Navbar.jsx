@@ -52,9 +52,9 @@ const Navbar = () => {
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-4">
                                 {navigation.map((item) => (
-                                    <a
+                                    <Link
                                         key={item.name}
-                                        href={item.href}
+                                        to={item.href}
                                         aria-current={item.current ? 'page' : undefined}
                                         className={classNames(
                                         item.current ? 'bg-primary-text text-white' : 'hover:bg-primary-text hover:text-white transition-colors',
@@ -62,7 +62,7 @@ const Navbar = () => {
                                         )}
                                     >
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
                         </div>

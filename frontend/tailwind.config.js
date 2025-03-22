@@ -15,7 +15,7 @@ export default withMT({
       colors: {
         "primary-text": "#4e342e",
         "primary-bg": "#d7ccc8"
-      }
+      },
     },
   },
   plugins: [],
