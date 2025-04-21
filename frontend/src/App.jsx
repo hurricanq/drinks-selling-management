@@ -17,6 +17,7 @@ import SuccessfulPage from "./pages/SuccessfulPage"
 
 import ProfilePage from "./pages/ProfilePage"
 
+import AdminPage from "./pages/AdminPage"
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import LoadingSpinner from "./components/LoadingSpinner";
@@ -64,6 +65,8 @@ function App() {
         <Route path="/successful" element={user ? <SuccessfulPage /> : <Navigate to="/" />} />
 
         <Route path="/profile" element={user ? <ProfilePage /> : <Navigate to="/" />} />
+
+        <Route path="/admin" element={user ? <AdminPage /> : <Navigate to="/" />} />
       </Routes>
 
       <Footer />
