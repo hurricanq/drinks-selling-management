@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Link } from "react-router-dom";
 import { useUserStore } from "../stores/useUserStore";
@@ -8,10 +8,20 @@ const LogInPage = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [rememberMe, setRememberMe] = useState(false);
+
+    // Load remembered email if it exists
+    useEffect(() => {
+        const rememberedEmail = localStorage.getItem('rememberedEmail');
+        if (rememberedEmail) {
+            setEmail(rememberedEmail);
+            setRememberMe(true);
+        }
+    }, []);
     
     const handleSubmit = async (e) => {
         e.preventDefault();
-        login(email, password);
+        login(email, password, rememberMe);
     };
 
     return (
@@ -76,13 +86,21 @@ const LogInPage = () => {
                             </div>
 
                             <div className="flex justify-between items-center text-sm mt-3">
-                            <div className="flex items-center gap-x-2">
-                                <p className="font-semibold">Remember me</p>
-                                <input type="checkbox" name="remember" className="cursor-pointer" />
-                            </div>
-                            <Link to="#" className="font-semibold text-primary-text hover:text-brown-600">
-                                Forgot password?
-                            </Link>
+                                <div className="flex items-center gap-x-2">
+                                    <input
+                                        type="checkbox"
+                                        id="remember"
+                                        checked={rememberMe}
+                                        onChange={(e) => setRememberMe(e.target.checked)}
+                                        className="cursor-pointer h-4 w-4 rounded border-gray-300 text-primary-text focus:ring-primary-text"
+                                    />
+                                    <label htmlFor="remember" className="font-semibold cursor-pointer">
+                                        Remember me
+                                    </label>
+                                </div>
+                                <Link to="#" className="font-semibold text-primary-text hover:text-brown-600">
+                                    Forgot password?
+                                </Link>
                             </div>
                         </div>
 

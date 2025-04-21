@@ -65,13 +65,34 @@ export const signup = async (req, res) => {
 
 export const login = async (req, res) => {
 	try {
-		const { email, password } = req.body;
+		const { email, password, rememberMe } = req.body;
 		const user = await User.findOne({ email });
 
 		if (user && (await user.comparePassword(password))) {
 			const { accessToken, refreshToken } = generateTokens(user._id);
 			await storeRefreshToken(user._id, refreshToken);
-			setCookies(res, accessToken, refreshToken);
+			
+			// setCookies(res, accessToken, refreshToken);
+
+			// Adjust cookie expiration based on remember me
+			const cookieOptions = {
+				httpOnly: true,
+				secure: process.env.NODE_ENV === "production",
+				sameSite: "strict",
+			};
+			
+			// Set longer expiration if remember me is true
+			if (rememberMe) {
+				cookieOptions.maxAge = 30 * 24 * 60 * 60 * 1000; // 30 days
+			} else {
+				cookieOptions.maxAge = 15 * 60 * 1000; // 15 minutes
+			}
+			
+			res.cookie("accessToken", accessToken, cookieOptions);
+			res.cookie("refreshToken", refreshToken, {
+				...cookieOptions,
+				maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 7 * 24 * 60 * 60 * 1000,
+			});
 
 			res.json({
 				_id: user._id,

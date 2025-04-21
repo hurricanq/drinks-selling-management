@@ -20,11 +20,18 @@ export const useUserStore = create((set, get) => ({
 		}
 	},
 
-	login: async (email, password) => {
+	login: async (email, password, rememberMe = false) => {
 		set({ loading: true });
 
 		try {
 			const res = await axios.post("/auth/login", { email, password });
+
+			// If remember me is checked, store the email (but not the password for security)
+			if (rememberMe) {
+				localStorage.setItem('rememberedEmail', email);
+			} else {
+				localStorage.removeItem('rememberedEmail');
+			}
 
 			set({ user: res.data, loading: false });
 		} catch (error) {
