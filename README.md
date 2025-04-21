@@ -29,3 +29,10 @@ Step 4: Next, type the following commands:
 cd ..
 cd frontend
 npm run dev
+```
+
+## Test Account (use this to log in to the website)
+```
+Email: test1@gmail.com
+Password: 123456
+```
