@@ -79,7 +79,7 @@ const DrinkDetailPage = () => {
                 <div className="w-full p-4 rounded-xl flex flex-col lg:flex-row justify-between gap-10">
                     {/* Left Section */}
                     <div className="md:w-1/2 relative">
-                        <img src={`../assets/${drink.image}`} alt="" className="w-full rounded-xl" />
+                        <img src={drink.image} alt="" className="w-full rounded-xl" />
                     </div>
 
                     {/* Right Section */}

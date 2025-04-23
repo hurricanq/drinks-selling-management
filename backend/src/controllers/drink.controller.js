@@ -24,12 +24,18 @@ export const getDrink = async (req, res) => {
 export const createDrink = async (req, res) => {
     try {
         const { name, description, price, image, categoryId } = req.body;
+
+        let cloudinaryResponse = null;
+
+		if (image) {
+			cloudinaryResponse = await cloudinary.uploader.upload(image, { folder: "drinks" });
+		}
         
         const drink = await Drink.create({
             name,
 			description,
 			price,
-			image,
+			image: cloudinaryResponse?.secure_url ? cloudinaryResponse.secure_url : "",
 			categoryId,
         });
         res.status(200).json({ status: "Successful", data: { drink } });

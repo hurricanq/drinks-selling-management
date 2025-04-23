@@ -12,7 +12,7 @@ export const momoPayment = async (req, res) => {
     var redirectUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b'; // back to our page
     var ipnUrl = 'https://a02a-14-186-70-208.ngrok-free.app/callback'; // thank you page
     var requestType = "payWithMethod";
-    var amount = '50000';
+    var amount = req.body.total.toString();
     var orderId = partnerCode + new Date().getTime();
     var requestId = orderId;
     var extraData ='';

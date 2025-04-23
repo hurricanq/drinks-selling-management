@@ -7,6 +7,7 @@ export const useDrinkStore = create((set) => ({
 	drink: [],
 	reviews: [],
 	loading: false,
+	sortBy: "name-asc", // Default sort by name ascending
 
 	setDrinks: (drinks) => set({ drinks }),
 	
@@ -95,5 +96,30 @@ export const useDrinkStore = create((set) => ({
 			toast.error(error.response.data.error);
 			set({ loading: false });
 		}
+	},
+
+	sortDrinks: (sortOption) => {
+		set((state) => {
+			const sortedDrinks = [...state.drinks];
+			
+			switch (sortOption) {
+				case "name-asc":
+					sortedDrinks.sort((a, b) => a.name.localeCompare(b.name));
+					break;
+				case "name-desc":
+					sortedDrinks.sort((a, b) => b.name.localeCompare(a.name));
+					break;
+				case "price-asc":
+					sortedDrinks.sort((a, b) => a.price - b.price);
+					break;
+				case "price-desc":
+					sortedDrinks.sort((a, b) => b.price - a.price);
+					break;
+				default:
+					break;
+			}
+			
+			return { drinks: sortedDrinks, sortBy: sortOption };
+		});
 	},
 }));

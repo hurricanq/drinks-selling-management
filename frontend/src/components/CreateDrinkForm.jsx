@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
+
 import { motion } from "framer-motion";
-import { PlusCircle, Loader } from "lucide-react";
+import { PlusCircle, Upload, Loader } from "lucide-react";
 
 import { useDrinkStore } from "../stores/useDrinkStore";
 import { useCategoryStore } from "../stores/useCategoryStore";
@@ -106,35 +107,16 @@ const CreateDrinkForm = () => {
 					/>
 				</div>
 
-                {/*
 				<div className='mt-1 flex items-center'>
 					<input type='file' id='image' className='sr-only' accept='image/*' onChange={handleImageChange} />
 					<label
 						htmlFor='image'
-						className='cursor-pointer bg-blue-700 py-2 px-3 border border-blue-600 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-300 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500'
+						className='cursor-pointer bg-primary-text py-2 px-3 border border-brown-600 rounded-md shadow-sm text-sm leading-4 font-medium text-gray-300 hover:bg-brown-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brown-500'
 					>
 						<Upload className='h-5 w-5 inline-block mr-2' />
 						Upload Image
 					</label>
 					{newDrink.image && <span className='ml-3 text-sm text-gray-400'>Image uploaded successfully</span>}
-				</div>
-                */}
-
-<div>
-				<label htmlFor='image' className='block text-sm font-medium text-white'>
-					File name of image
-				</label>
-					<input
-						type='text'
-						id='image'
-						name='image'
-						value={newDrink.image}
-						onChange={(e) => setNewDrink({ ...newDrink, image: e.target.value })}
-						className='mt-1 block w-full bg-primary-text border border-brown-600 rounded-md shadow-sm py-2
-						 px-3 text-white focus:outline-none focus:ring-2
-						focus:ring-brown-500 focus:border-brown-500'
-						required
-					/>
 				</div>
 
                 <div>

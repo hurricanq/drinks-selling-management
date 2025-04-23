@@ -1,59 +1,94 @@
 import React from 'react';
-
 import { Typography } from "@material-tailwind/react";
 
 const Footer = () => {
   return (
-    <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 border-t border-blue-gray-50 py-6 text-center md:justify-between">
-      <div className="mx-auto max-w-7xl">
-        <Typography color="blue-gray" className="font-normal">
-          &copy; 61House
-        </Typography>
-        <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
-          <li>
-            <Typography
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              About Us
+    <footer className="bg-gray-50">
+      <div className="mx-auto max-w-7xl px-4 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          {/* About Section */}
+          <div className="space-y-4">
+            <Typography variant="h5" color="blue-gray" className="font-bold">
+              61House
             </Typography>
-          </li>
-          <li>
-            <Typography
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              License
+            <Typography className="text-gray-600">
+              Your favorite destination for refreshing drinks. We serve the best quality beverages with exceptional service.
             </Typography>
-          </li>
-          <li>
-            <Typography
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              Contribute
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <Typography variant="h6" color="blue-gray" className="font-bold mb-4">
+              Quick Links
             </Typography>
-          </li>
-          <li>
-            <Typography
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
+            <ul className="space-y-2">
+              <li>
+                <a href="/menu" className="text-gray-600 hover:text-blue-500">
+                  Menu
+                </a>
+              </li>
+              <li>
+                <a href="/about" className="text-gray-600 hover:text-blue-500">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="/contact" className="text-gray-600 hover:text-blue-500">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <Typography variant="h6" color="blue-gray" className="font-bold mb-4">
               Contact Us
             </Typography>
-          </li>
-        </ul>
+            <ul className="space-y-2">
+              <li className="flex items-center space-x-2">
+                <span className="text-gray-600">Ho Chi Minh City, Vietnam</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="text-gray-600">+84 123 456 789</span>
+              </li>
+              <li className="flex items-center space-x-2">
+                <span className="text-gray-600">info@61house.com</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Opening Hours */}
+          <div>
+            <Typography variant="h6" color="blue-gray" className="font-bold mb-4">
+              Opening Hours
+            </Typography>
+            <ul className="space-y-2">
+              <li className="flex justify-between">
+                <span className="text-gray-600">Monday - Friday</span>
+                <span className="text-gray-600">9:00 AM - 10:00 PM</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="text-gray-600">Saturday</span>
+                <span className="text-gray-600">10:00 AM - 11:00 PM</span>
+              </li>
+              <li className="flex justify-between">
+                <span className="text-gray-600">Sunday</span>
+                <span className="text-gray-600">11:00 AM - 9:00 PM</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="mt-8 pt-8 border-t border-gray-200">
+          <Typography className="text-center text-gray-600">
+            &copy; {new Date().getFullYear()} 61House. All rights reserved.
+          </Typography>
+        </div>
       </div>
     </footer>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

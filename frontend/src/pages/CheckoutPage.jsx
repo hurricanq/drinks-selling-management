@@ -10,6 +10,9 @@ const CheckoutPage = () => {
     const { cart, total, subtotal } = useCartStore();
     const navigate = useNavigate();
 
+    // Fixed exchange rate
+    const EXCHANGE_RATE = 23000;
+
     const [orderInfo, setOrderInfo] = useState({
         username: user.username,
         email: user.email,
@@ -21,7 +24,9 @@ const CheckoutPage = () => {
         e.preventDefault()
 
         try {
-            const response = await axios.post("/payment/momo");
+            // Convert USD to VND and send to backend
+            const vndAmount = Math.round(total * EXCHANGE_RATE);
+            const response = await axios.post("/payment/momo", { total: vndAmount });
             console.log(response, 'res');
 
             if (response.data.message == "Thành công.") {
@@ -63,7 +68,7 @@ const CheckoutPage = () => {
                         {cart.map((item) => (
                             <div key={item._id} className="flex gap-5 items-center">
                                 <div className="w-20 rounded-xl overflow-hidden">
-                                    <img src={`./assets/${item.image}`} alt={item.name} />
+                                    <img src={item.image} alt={item.name} />
                                 </div>
                                 <div>
                                     <h2 className="text-lg font-bold">{item.name}</h2>

@@ -61,7 +61,7 @@ const DrinksList = () => {
 									<div className='flex-shrink-0 h-10 w-10'>
 										<img
 											className='h-10 w-10 rounded-full object-cover'
-											src={`./assets/${drink.image}`}
+											src={drink.image}
 											alt={drink.name}
 										/>
 									</div>
