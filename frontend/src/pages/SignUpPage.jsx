@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-
 import { Link } from "react-router-dom";
+
 import { useUserStore } from "../stores/useUserStore";
+import { validateField, validateForm, hasErrors } from "../utils/validation";
 
 const SignUpPage = () => {
     const { signup, loading } = useUserStore();
@@ -13,9 +14,52 @@ const SignUpPage = () => {
         password: "",
     });
 
+    const [errors, setErrors] = useState({
+        username: "",
+        email: "",
+        phoneNumber: "",
+        password: ""
+    });
+
+    const [touched, setTouched] = useState({
+        username: false,
+        email: false,
+        phoneNumber: false,
+        password: false
+    });
+
+    const handleBlur = (field) => {
+        setTouched(prev => ({ ...prev, [field]: true }));
+        setErrors(prev => ({
+            ...prev,
+            [field]: validateField(field, formData[field])
+        }));
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+
+        // Clear error when user starts typing
+        if (errors[name]) {
+            setErrors(prev => ({ ...prev, [name]: "" }));
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        signup(formData)
+        
+        // Validate all fields
+        const formErrors = validateForm(formData);
+        setErrors(formErrors);
+
+        // If no errors, proceed with signup
+        if (!hasErrors(formErrors)) {
+            signup(formData);
+        }
     };
 
     return (  
@@ -30,12 +74,12 @@ const SignUpPage = () => {
                 <div className="flex flex-col justify-center p-6">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                         <img
-                        alt="Your Company"
-                        src="./assets/logo.png"
-                        className="mx-auto h-20 w-auto"
+                            alt="Your Company"
+                            src="./assets/logo.png"
+                            className="mx-auto h-20 w-auto"
                         />
                         <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-gray-900">
-                        Sign up for an account
+                            Sign up for an account
                         </h2>
                     </div>
 
@@ -53,9 +97,17 @@ const SignUpPage = () => {
                                         type="text"
                                         value={formData.username}
                                         required
-                                        onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        onChange={handleChange}
+                                        onBlur={() => handleBlur("username")}
+                                        className={`block w-full rounded-md border px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ${
+                                            touched.username && errors.username 
+                                                ? 'border-red-500 ring-red-300 focus:ring-red-500' 
+                                                : 'border-gray-300 ring-gray-300 focus:ring-primary-text'
+                                        } placeholder:text-gray-400 focus:outline-none sm:text-sm/6`}
                                     />
+                                    {touched.username && errors.username && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.username}</p>
+                                    )}
                                 </div>
                             </div>
 
@@ -72,13 +124,21 @@ const SignUpPage = () => {
                                         value={formData.email}
                                         required
                                         autoComplete="email"
-                                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        onChange={handleChange}
+                                        onBlur={() => handleBlur("email")}
+                                        className={`block w-full rounded-md border px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ${
+                                            touched.email && errors.email 
+                                                ? 'border-red-500 ring-red-300 focus:ring-red-500' 
+                                                : 'border-gray-300 ring-gray-300 focus:ring-primary-text'
+                                        } placeholder:text-gray-400 focus:outline-none sm:text-sm/6`}
                                     />
+                                    {touched.email && errors.email && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                                    )}
                                 </div>
                             </div>
 
-                            {/* Email */}
+                            {/* Phone Number */}
                             <div>
                                 <label htmlFor="phoneNumber" className="block text-sm/6 font-medium text-gray-900">
                                     Phone Number
@@ -90,9 +150,17 @@ const SignUpPage = () => {
                                         type="text"
                                         value={formData.phoneNumber}
                                         required
-                                        onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
-                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        onChange={handleChange}
+                                        onBlur={() => handleBlur("phoneNumber")}
+                                        className={`block w-full rounded-md border px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ${
+                                            touched.phoneNumber && errors.phoneNumber 
+                                                ? 'border-red-500 ring-red-300 focus:ring-red-500' 
+                                                : 'border-gray-300 ring-gray-300 focus:ring-primary-text'
+                                        } placeholder:text-gray-400 focus:outline-none sm:text-sm/6`}
                                     />
+                                    {touched.phoneNumber && errors.phoneNumber && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.phoneNumber}</p>
+                                    )}
                                 </div>
                             </div>
 
@@ -109,29 +177,30 @@ const SignUpPage = () => {
                                         value={formData.password}
                                         required
                                         autoComplete="current-password"
-                                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                        onChange={handleChange}
+                                        onBlur={() => handleBlur("password")}
+                                        className={`block w-full rounded-md border px-3 py-1.5 text-base text-gray-900 shadow-sm ring-1 ring-inset ${
+                                            touched.password && errors.password 
+                                                ? 'border-red-500 ring-red-300 focus:ring-red-500' 
+                                                : 'border-gray-300 ring-gray-300 focus:ring-primary-text'
+                                        } placeholder:text-gray-400 focus:outline-none sm:text-sm/6`}
                                     />
-                                </div>
-
-                                <div className="flex justify-between items-center text-sm mt-3">
-                                    <div className="flex items-center gap-x-2">
-                                        <p className="font-semibold">Remember me</p>
-                                        <input type="checkbox" name="remember" className="cursor-pointer" />
-                                    </div>
-                                    <Link to="#" className="font-semibold text-primary-text hover:text-brown-600">
-                                        Forgot password?
-                                    </Link>
+                                    {touched.password && errors.password && (
+                                        <p className="mt-1 text-sm text-red-600">{errors.password}</p>
+                                    )}
                                 </div>
                             </div>
 
-                            {/* Sign In Button */}
+                            {/* Sign Up Button */}
                             <div>
                                 <button
                                     type="submit"
-                                    className="flex w-full justify-center rounded-md bg-primary-text px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-brown-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                    disabled={loading}
+                                    className={`flex w-full justify-center rounded-md bg-primary-text px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-brown-600 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 ${
+                                        loading ? 'opacity-50 cursor-not-allowed' : ''
+                                    }`}
                                 >
-                                    Sign up
+                                    {loading ? 'Signing up...' : 'Sign up'}
                                 </button>
                             </div>
                         </form>
@@ -146,7 +215,7 @@ const SignUpPage = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default SignUpPage
+export default SignUpPage;

@@ -1,32 +1,45 @@
 import React from 'react';
 import { Link } from "react-router-dom";
 
-import CarouselComponent from "../components/CarouselComponent";
-import ButtonComponent from "../components/ButtonComponent";
-
 import { ArrowLongRightIcon } from "@heroicons/react/24/solid"
 
 import { motion } from "framer-motion";
+import AnimatedCounter from "../components/AnimatedCounter";
+
+const featuredCategories = [
+    {
+        name: "Coffee",
+        desc: "Rich, bold flavor and contains caffeine, a natural stimulant that helps increase alertness and energy.",
+        image: "./assets/coffeeCategory.png"
+    },
+    {
+        name: "Tea",
+        desc: "Comes in various types, including green, black, white, and oolong, each differing in flavor, aroma, and caffeine content based on processing methods.",
+        image: "./assets/teaCategory.png"
+    },
+    {
+        name: "Freeze",
+        desc: "Slushy or solid, depending on the desired consistency. Popular for refreshing summer beverages and enhancing texture and flavor.",
+        image: "./assets/freezeCategory.png"
+    }
+];
+
+const statistics = [
+    {
+        value: 5,
+        label: "Stores"
+    },
+    {
+        value: 100,
+        label: "Drinks"
+    },
+    {
+        value: 1000,
+        label: "Reviews"
+    }
+];
 
 const HomePage = () => {
-    const featuredCategories = [
-        {
-            name: "Coffee",
-            desc: "Rich, bold flavor and contains caffeine, a natural stimulant that helps increase alertness and energy.",
-            image: "./assets/coffeeCategory.png"
-        },
-        {
-            name: "Tea",
-            desc: "Comes in various types, including green, black, white, and oolong, each differing in flavor, aroma, and caffeine content based on processing methods.",
-            image: "./assets/teaCategory.png"
-        },
-        {
-            name: "Freeze",
-            desc: "Slushy or solid, depending on the desired consistency. Popular for refreshing summer beverages and enhancing texture and flavor.",
-            image: "./assets/freezeCategory.png"
-        }
-    ];
-
     return (
         <div>
             {/* Hero */}
@@ -136,6 +149,31 @@ const HomePage = () => {
                             className="w-full rounded-lg"
                         />
                     </motion.div>
+                </div>
+            </div>
+
+            {/* Statistics */}
+            <div className="py-10">
+                <div className="mx-auto max-w-7xl px-10 lg:px-1 flex flex-col items-center">
+                    <h1 className="text-3xl font-bold text-primary-text">Statistics</h1>
+                    <div className="grid grid-cols-3 gap-20 mt-5">
+                        {statistics.map(stat => {
+                            return (
+                                <motion.div 
+                                    className="flex flex-col text-center gap-3 mt-3"
+                                    initial={{ opacity: 0, y: 50 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true, margin: "-100px" }}
+                                    transition={{ duration: 1.0, ease: "easeOut" }}
+                                >
+                                    <div className="text-5xl font-bold text-primary-text">
+                                        <AnimatedCounter value={stat.value} />
+                                    </div>
+                                    <h2 className="text-md font-bold text-gray-700">{stat.label}</h2>
+                                </motion.div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
