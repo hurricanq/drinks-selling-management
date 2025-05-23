@@ -1,11 +1,13 @@
 import React from 'react';
 
+import OptimizedImage from './OptimizedImage';
+
 const CardComponent = (props) => {
     return (
         <div className="p-5 shadow-sm rounded-xl">
             {/* Image */}
             <div className="rounded-xl overflow-hidden">
-                <img
+                <OptimizedImage
                     src={props.image}
                     alt={props.name}
                     className="hover:scale-110 transition-transform"

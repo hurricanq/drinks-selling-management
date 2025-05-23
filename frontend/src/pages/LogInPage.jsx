@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import { useUserStore } from "../stores/useUserStore";
 import { validateField, validateForm, hasErrors } from "../utils/validation";
+import OptimizedImage from "../components/OptimizedImage";
 
 const LogInPage = () => {
     const { login, loading } = useUserStore();
@@ -74,13 +75,13 @@ const LogInPage = () => {
             <div className="mx-auto max-w-7xl grid lg:grid-cols-2 mt-10">
                 {/* Left Side - Image */}
                 <div className="hidden lg:flex items-center justify-center p-6">
-                    <img src="./assets/login.jpg" alt="" className="rounded-xl" />
+                    <OptimizedImage src="./assets/login.jpg" alt="Login" className="rounded-xl" />
                 </div>
 
                 {/* Right Side - Form */}
                 <div className="flex flex-col justify-center p-6">
                     <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                        <img
+                        <OptimizedImage
                             alt="Your Company"
                             src="./assets/logo.png"
                             className="mx-auto h-20 w-auto"

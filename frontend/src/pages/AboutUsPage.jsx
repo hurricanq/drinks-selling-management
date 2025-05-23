@@ -1,5 +1,5 @@
 import React from 'react';
-
+import OptimizedImage from '../components/OptimizedImage';
 import { BookOpenIcon, TruckIcon, LockClosedIcon } from "@heroicons/react/24/outline"
 
 const AboutUsPage = () => {
@@ -12,14 +12,14 @@ const AboutUsPage = () => {
               <div className="flex items-center -mx-3 sm:-mx-4">
                 <div className="w-full px-3 sm:px-4 xl:w-1/2 aspect-auto">
                   <div className="py-3 sm:py-4">
-                    <img
+                    <OptimizedImage
                       src="./assets/appleCarousel.jpg"
                       alt=""
                       className="w-full rounded-2xl"
                     />
                   </div>
                   <div className="py-3 sm:py-4">
-                    <img
+                    <OptimizedImage
                       src="./assets/orangeCarousel.jpg"
                       alt=""
                       className="w-full rounded-2xl"
@@ -28,7 +28,7 @@ const AboutUsPage = () => {
                 </div>
                 <div className="w-full px-3 sm:px-4 xl:w-1/2">
                   <div className="relative z-10 my-4">
-                    <img
+                    <OptimizedImage
                       src="./assets/wallpaper.jpg"
                       alt=""
                       className="w-full rounded-2xl"

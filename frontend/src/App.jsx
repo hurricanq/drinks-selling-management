@@ -44,7 +44,7 @@ function App() {
 	if (checkingAuth) return <LoadingSpinner />;
 
   return (
-    <div class="font-outfit">
+    <div className="font-outfit">
       <div className="bg-white sticky top-0 z-40">
         <Navbar />
       </div>

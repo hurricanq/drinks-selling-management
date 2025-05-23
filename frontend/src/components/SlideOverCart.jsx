@@ -9,6 +9,7 @@ import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/re
 import { XMarkIcon } from '@heroicons/react/24/outline'
 
 import toast from "react-hot-toast";
+import OptimizedImage from "./OptimizedImage";
 
 const SlideOverCart = () => {
     const { cart, subtotal, isOpen, removeFromCart, updateQuantity, toggleCart } = useCartStore();
@@ -53,7 +54,7 @@ const SlideOverCart = () => {
                                                     {cart.map((item) => (
                                                         <li key={item._id} className="flex py-6">
                                                             <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                                                <img alt={item.name} src={item.image} className="size-full object-cover" />
+                                                                <OptimizedImage alt={item.name} src={item.image} className="size-full object-cover" />
                                                             </div>
                                 
                                                             <div className="ml-4 flex flex-1 flex-col">

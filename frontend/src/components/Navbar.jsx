@@ -5,6 +5,7 @@ import { useUserStore } from "../stores/useUserStore";
 import { useCartStore } from "../stores/useCartStore";
 
 import SlideOverCart from "./SlideOverCart";
+import OptimizedImage from "./OptimizedImage";
 
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
@@ -31,7 +32,7 @@ const Navbar = () => {
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                         {/* Mobile menu button*/}
-                        <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-primary-text hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
+                        <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-primary-text hover:bg-primary-text hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
                             <span className="absolute -inset-0.5" />
                             <span className="sr-only">Open main menu</span>
                             <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden" />
@@ -42,7 +43,7 @@ const Navbar = () => {
                     <div className="flex flex-1 items-center justify-center sm:justify-start">
                         <div className="flex shrink-0 items-center">
                             <Link to="/">
-                                <img
+                                <OptimizedImage
                                     alt="Your Company"
                                     src="../assets/logo.png"
                                     className="h-12 w-auto"
@@ -115,10 +116,10 @@ const Navbar = () => {
                                 {/* Profile Dropdown */}
                                 <Menu as="div" className="relative ml-3">
                                     <div>
-                                        <MenuButton className="relative flex rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
+                                        <MenuButton className="relative flex rounded-full bg-primary-bg text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brown-800 focus:outline-hidden">
                                             <span className="absolute -inset-1.5" />
                                             <span className="sr-only">Open user menu</span>
-                                            <img
+                                            <OptimizedImage
                                                 alt=""
                                                 src={user.profilePic}
                                                 className="size-8 rounded-full"
@@ -133,7 +134,7 @@ const Navbar = () => {
                                         <MenuItem>
                                             <Link
                                                 to="/profile"
-                                                className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
+                                                className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-primary-bg data-focus:outline-hidden"
                                             >
                                                 Your Profile
                                             </Link>
@@ -171,7 +172,7 @@ const Navbar = () => {
                             href={item.href}
                             aria-current={item.current ? 'page' : undefined}
                             className={classNames(
-                                item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                item.current ? 'bg-primary-bg text-white' : 'text-primary-text hover:bg-primary-text hover:text-white',
                                 'block rounded-md px-3 py-2 text-base font-medium',
                             )}
                         >

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useUserStore } from "../stores/useUserStore";
 import { Camera, Mail, User } from "lucide-react";
 
+import OptimizedImage from "../components/OptimizedImage";
+
 const ProfilePage = () => {
     const { user, isUpdatingProfile, updateProfile } = useUserStore();
     const [selectedImg, setSelectedImg] = useState(null);
@@ -33,7 +35,7 @@ const ProfilePage = () => {
                     {/* Avatar upload section */}
                     <div className="flex flex-col items-center gap-4">
                         <div className="relative">
-                            <img
+                            <OptimizedImage
                                 src={selectedImg || user.profilePic || "./assets/avatar.png"}
                                 alt="Profile"
                                 className="size-32 rounded-full object-cover border-4 "

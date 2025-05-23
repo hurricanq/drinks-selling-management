@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import axios from "../config/axios";
 import { formatDate, formatTime } from "../config/format"
@@ -10,8 +11,8 @@ import { useCartStore } from "../stores/useCartStore";
 
 import LoadingSpinner from "../components/LoadingSpinner";
 import Breadcrumb from "../components/Breadcrumb";
+import OptimizedImage from "../components/OptimizedImage";
 import { Button } from "@material-tailwind/react";
-import toast from "react-hot-toast";
 
 const DrinkDetailPage = () => {
     const { id } = useParams(); // Get drink ID from URL
@@ -79,7 +80,7 @@ const DrinkDetailPage = () => {
                 <div className="w-full p-4 rounded-xl flex flex-col lg:flex-row justify-between gap-10">
                     {/* Left Section */}
                     <div className="md:w-1/2 relative">
-                        <img src={drink.image} alt="" className="w-full rounded-xl" />
+                        <OptimizedImage src={drink.image} alt={drink.name} className="w-full rounded-xl" />
                     </div>
 
                     {/* Right Section */}
@@ -173,7 +174,7 @@ const DrinkDetailPage = () => {
                                 <div key={review._id} className="px-5 py-2">
                                     <div className="flex gap-5">
                                         <div className="w-14 h-14">
-                                            <img src={review.profilePic} alt="" className="rounded-full" />
+                                            <OptimizedImage src={review.profilePic} alt="" className="rounded-full" />
                                         </div>
                                         <div>
                                             <h3 className="text-xl font-bold">{review.username}</h3>

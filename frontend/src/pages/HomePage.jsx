@@ -5,6 +5,7 @@ import { ArrowLongRightIcon } from "@heroicons/react/24/solid"
 
 import { motion } from "framer-motion";
 import AnimatedCounter from "../components/AnimatedCounter";
+import OptimizedImage from "../components/OptimizedImage";
 
 const featuredCategories = [
     {
@@ -44,7 +45,7 @@ const HomePage = () => {
         <div>
             {/* Hero */}
             <div className="bg-primary-bg">
-                <div className="relative mx-auto max-w-7xl px-10 lg:px-1 py-10 lg:py-1 flex flex-col lg:flex-row items-center">
+                <div className="relative mx-auto max-w-7xl px-10 py-10 lg:py-0 flex flex-col lg:flex-row items-center">
                     {/* Left Section */}
                     <motion.div
                         className="md:w-1/2"
@@ -58,7 +59,7 @@ const HomePage = () => {
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc eget metus mi. Etiam iaculis, arcu viverra ullamcorper egestas, quam urna ornare est, vel tristique ligula nulla id elit.</p>
                         </div>
 
-                        <div className="mt-5">
+                        <div className="mt-5 flex justify-center lg:justify-start">
                             <Link to="/menu">
                                 <button className="bg-primary-text px-5 py-2 rounded-xl text-white text-lg flex items-center gap-2 hover:opacity-70 transition-opacity">
                                     Visit menu 
@@ -70,13 +71,13 @@ const HomePage = () => {
                     
                     {/* Right Section */}
                     <motion.div
-                        className="md:w-1/2 aspect-square"
+                        className="md:w-1/2 aspect-square hidden lg:block"
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 2.0, ease: "easeOut" }}
                     >
-                        <img src="./assets/home.png" alt="" />
+                        <OptimizedImage src="./assets/home.png" alt="Home" className="w-full h-full object-cover rounded-lg" />
                     </motion.div>
                 </div>
             </div> 
@@ -96,7 +97,7 @@ const HomePage = () => {
                                     transition={{ duration: 1.0, ease: "easeOut" }}
                                 >
                                     <div className="w-full overflow-hidden aspect-square">
-                                        <img src={category.image} alt="" className="hover:scale-110 transition-transform" />
+                                        <OptimizedImage src={category.image} alt={category.name} className="hover:scale-110 transition-transform" />
                                     </div>
                                     <div className="flex flex-col text-center gap-3 mt-3">
                                         <h2 className="text-lg font-bold text-primary-text">{category.name}</h2>
@@ -111,28 +112,32 @@ const HomePage = () => {
 
             {/* About Us */}
             <div className="py-10">
-                <div className="mx-auto max-w-7xl px-10 lg:px-1 flex flex-col lg:flex-row items-center justify-between">
+                <div className="mx-auto max-w-7xl px-10 py-10 lg:py-0 flex flex-col md:flex-row items-center justify-between">
                     {/* Left Section */}
                     <motion.div
-                        className="md:w-1/2 text-center md:text-left flex flex-col gap-5 lg:pr-10"
+                        className="md:w-1/2 flex flex-col gap-5 lg:pr-10"
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 1.0, ease: "easeOut" }}
                     >
-                        <h1 className="text-3xl font-bold text-primary-text">
-                            About Us
-                        </h1>
-                        <p className="text-gray-700 text-lg">
-                            We serve freshly brewed coffee, espresso-based drinks, and other beverages like tea and hot chocolate. The store offers a cozy atmosphere where customers can relax, work, or socialize.
-                        </p>
+                        <div className="flex flex-col text-center md:text-left gap-3">
+                            <h1 className="text-3xl font-bold text-primary-text">
+                                About Us
+                            </h1>
+                            <p className="text-gray-700 text-lg md:line-clamp-3">
+                                We serve freshly brewed coffee, espresso-based drinks, and other beverages like tea and hot chocolate. The store offers a cozy atmosphere where customers can relax, work, or socialize.
+                            </p>
+                        </div>
 
-                        <Link to="/about">
-                            <button className="bg-primary-text px-5 py-2 rounded-xl text-white text-lg flex items-center gap-2 hover:opacity-70 transition-opacity">
-                                Learn more 
-                                <ArrowLongRightIcon className="h-5"/>
-                            </button>
-                        </Link>
+                        <div className="flex justify-center md:justify-start">
+                            <Link to="/about">
+                                <button className="bg-primary-text px-5 py-2 rounded-xl text-white text-lg flex items-center gap-2 hover:opacity-70 transition-opacity">
+                                    Learn more 
+                                    <ArrowLongRightIcon className="h-5"/>
+                                </button>
+                            </Link>
+                        </div>
                     </motion.div>
 
                     {/* Right Section */}
@@ -143,7 +148,7 @@ const HomePage = () => {
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 1.0, ease: "easeOut" }}
                     >
-                        <img
+                        <OptimizedImage
                             src='./assets/coffeeShop.jpg'
                             alt="Coffee"
                             className="w-full rounded-lg"
@@ -160,6 +165,7 @@ const HomePage = () => {
                         {statistics.map(stat => {
                             return (
                                 <motion.div 
+                                    key={stat.label}
                                     className="flex flex-col text-center gap-3 mt-3"
                                     initial={{ opacity: 0, y: 50 }}
                                     whileInView={{ opacity: 1, y: 0 }}
